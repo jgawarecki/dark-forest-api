@@ -16,3 +16,4 @@
 /home/joel/Apps/dark-forest-api/obj/Debug/netcoreapp3.1/dark-forest-api.RazorTargetAssemblyInfo.cache
 /home/joel/Apps/dark-forest-api/obj/Debug/netcoreapp3.1/dark-forest-api.dll
 /home/joel/Apps/dark-forest-api/obj/Debug/netcoreapp3.1/dark-forest-api.pdb
+/home/joel/Apps/dark-forest-api/bin/Debug/netcoreapp3.1/certificate.json
