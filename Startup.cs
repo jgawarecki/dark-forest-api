@@ -28,13 +28,17 @@ namespace dark_forest_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddMvc(
-        options =>
-        {
-            options.SslPort = 44321;
-            options.Filters.Add(new RequireHttpsAttribute());
-        }
-    );
+            services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+                }));
+            //     services.AddMvc(
+            // options =>
+            // {
+            //     options.SslPort = 44321;
+            //     options.Filters.Add(new RequireHttpsAttribute());
+            // }
+            // );
 
             services.AddAntiforgery(
                 options =>
@@ -45,11 +49,16 @@ namespace dark_forest_api
                     options.HeaderName = "X-XSRF-TOKEN";
                 }
             );
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // app.UseMiddleware(typeof(CorsMiddleware));
+
+            app.UseCors("ApiCorsPolicy");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -65,6 +74,8 @@ namespace dark_forest_api
             {
                 endpoints.MapControllers();
             });
+
+            // app.UseMvc();
         }
     }
 }

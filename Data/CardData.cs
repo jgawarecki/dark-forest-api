@@ -14,6 +14,9 @@ namespace lord_of_death
         {
             Name = "Jab",
             Description = "jab staff with piercing blows",
+            ImgName = "jab.png",
+            ImgBack = "staff_back.png",
+            Id = 1,
             EnemyEffect = new EnemyEffect()
             {
                 Damage = 6,
