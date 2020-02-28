@@ -1,6 +1,6 @@
 namespace lord_of_death
 {
-    class AllyStatus : AllyEffect
+    public class AllyStatus : AllyEffect
     {
 
     }

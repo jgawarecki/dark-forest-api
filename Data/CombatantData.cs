@@ -8,18 +8,12 @@ namespace lord_of_death
         {
             return new Combatant
             {
-                Name = "Moze",
+                Name = "Gretchin",
                 MaxHealth = 60,
                 Health = 60,
                 MaxEnergy = 4,
                 Energy = 4,
-                BattleCircuit = new BattleCircuit
-                {
-                    AggroLoop = new List<BattleAct>
-                    {
-
-                    }
-                }
+                ImgName = "player.gif"
             };
         }
 
@@ -85,6 +79,7 @@ namespace lord_of_death
                 MaxEnergy = 2,
                 Energy = 4,
                 Level = level,
+                ImgName = "skele.gif",
                 AllyStatus = new AllyStatus()
                 {
                     Shield = 10

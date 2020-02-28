@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace lord_of_death
 {
-    class BattleCircuit
+    public class BattleCircuit
     {
         private List<BattleAct> highLoop = new List<BattleAct>();
         private List<BattleAct> midLoop = new List<BattleAct>();
@@ -16,11 +16,11 @@ namespace lord_of_death
         // private int desperatetLoopIndex = 0;
         private int currentLoopIndex = 0;
 
-        internal List<BattleAct> AggroLoop { get => highLoop; set => highLoop = value; }
+        public List<BattleAct> AggroLoop { get => highLoop; set => highLoop = value; }
         internal List<BattleAct> ReservedLoop { get => midLoop; set => midLoop = value; }
         internal List<BattleAct> SupportiveLoop { get => lowLoop; set => lowLoop = value; }
         // internal List<BattleAct> DesperateLoop { get => desperateLoop; set => desperateLoop = value; }
-        internal List<BattleAct> CurrentLoop { get => currentLoop; set => currentLoop = value; }
+        public List<BattleAct> CurrentLoop { get => currentLoop; set => currentLoop = value; }
 
         public void Update(Combatant dude)
         {

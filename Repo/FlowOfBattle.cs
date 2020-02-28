@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace lord_of_death
 {
@@ -7,7 +8,7 @@ namespace lord_of_death
     {
         public static bool DoBattle(Combatant player, List<Combatant> monsters)
         {
-            var battlefield = new Battlefield(CombatantData.SummonPlayer(), monsters);
+            var battlefield = new Battlefield(CombatantData.SummonPlayer(), monsters.First());
             var dealer = new Dealer(CardData.GetActiveDeck(), 4);
             dealer.ShuffleDrawPile();
             var battleContinues = true;
@@ -17,7 +18,6 @@ namespace lord_of_death
                 var playerWins = doPlayersTurn(battlefield, dealer);
                 if (playerWins)
                 {
-                    battleContinues = false;
                     playerSurvives = true;
                     break;
                 }

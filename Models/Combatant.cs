@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace lord_of_death
 {
-    class Combatant
+    public class Combatant
     {
         #region Private Fields
         private string name;
@@ -15,19 +15,24 @@ namespace lord_of_death
         private int energyGainPerTurn = -1;
         private BattleCircuit battleCircuit = new BattleCircuit();
         private int battleCircuitIndex = 0;
+        private string imgName;
         #endregion
 
         public bool IsAlive { get => health > 0; }
-        public AllyStatus AllyStatus = new AllyStatus();
-        public EnemyStatus EnemyStatus = new EnemyStatus();
+        public string Name { get => name; set => name = value; }
+        public string ImgName { get => imgName; set => imgName = value; }
+        private AllyStatus allyStatus = new AllyStatus();
+        private EnemyStatus enemyStatus = new EnemyStatus();
         public int Health { get => health; set => health = value; }
         public int Energy { get => energy; set => energy = value; }
-        public string Name { get => name; set => name = value; }
+
         public int Level { get => level; set => level = value; }
         public int MaxHealth { get => maxHealth; set => maxHealth = value; }
         public int MaxEnergy { get => maxEnergy; set => maxEnergy = value; }
         public int EnergyGainPerTurn { get => energyGainPerTurn == -1 ? maxEnergy : energyGainPerTurn; set => energyGainPerTurn = value; }
-        internal BattleCircuit BattleCircuit { get => battleCircuit; set => battleCircuit = value; }
+        public BattleCircuit BattleCircuit { get => battleCircuit; set => battleCircuit = value; }
+        public AllyStatus AllyStatus { get => allyStatus; set => allyStatus = value; }
+        public EnemyStatus EnemyStatus { get => enemyStatus; set => enemyStatus = value; }
 
         // public void BeginningPhase()
         // {

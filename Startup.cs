@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using lord_of_death;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -19,7 +20,6 @@ namespace dark_forest_api
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            DealerRepo.DealerSetup();
         }
 
         public IConfiguration Configuration { get; }
@@ -27,6 +27,9 @@ namespace dark_forest_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // app.UseMvc();
+            services.AddSingleton<IDealerRepo, DealerRepo>();
+            services.AddSingleton<IBattlefieldRepo, BattlefieldRepo>();
             services.AddControllers();
             services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
                 {

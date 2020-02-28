@@ -7,12 +7,15 @@ namespace lord_of_death
 
     public class Dealer
     {
+        private List<Card> deck;
         private List<Card> drawPile;
         private List<Card> discardPile;
         private List<Card> currentHand;
 
         private int handSize = 0;
         private static Random rnd = new Random();
+
+        public List<Card> Deck { get => deck; }
 
         public List<Card> GetCurrentHand()
         {
@@ -35,15 +38,21 @@ namespace lord_of_death
             return hand;
         }
 
+        public CardSplit GetCurrentSplit()
+        {
+            return new CardSplit(GetDrawPile(), GetCurrentHand(), GetDiscardPile());
+        }
+
 
         public Dealer(List<Card> cards, int handSize)
         {
             this.handSize = handSize;
             drawPile = new List<Card>();
-            cards = addCardIds(cards);
-            drawPile.AddRange(cards);
             discardPile = new List<Card>();
             currentHand = new List<Card>();
+            deck = addCardIds(cards);
+            drawPile.AddRange(deck);
+
         }
 
         private List<Card> addCardIds(List<Card> cards)
@@ -51,36 +60,14 @@ namespace lord_of_death
             for (int i = 0; i < cards.Count; i++)
             {
                 var card = cards[i];
-                card.Id = i;
+                card.Id = i + "";
             }
             return cards;
         }
-
-        // public void drawRandom(int count = 4)
-        // {
-        //     for (int i = 0; i < count; i++)
-        //     {
-
-        //         if (drawPile.Count == 0)
-        //         {
-        //             //if discard and draw pile are empty, do nothing
-        //             if (discardPile.Count == 0)
-        //             {
-        //                 break;
-        //             }
-        //             drawPile.AddRange(discardPile);
-        //             discardPile.Clear();
-        //         }
-
-        //         int r = rnd.Next(drawPile.Count);
-        //         currentHand.Add(drawPile[r]);
-        //         drawPile.RemoveAt(r);
-        //     }
-        // }
-
-        public void DrawHand()
+        public void DrawHand(int count = -1)
         {
-            for (int i = 0; i < handSize; i++)
+            count = count == -1 ? handSize : count;
+            for (int i = 0; i < count; i++)
             {
                 if (drawPile.Count == 0)
                 {
@@ -123,7 +110,7 @@ namespace lord_of_death
             discardPile.AddRange(currentHand);
             currentHand.Clear();
         }
-        public void Discard(int cardId)
+        public void Discard(string cardId)
         {
             var selectedCard = currentHand.FirstOrDefault(c => c.Id == cardId);
             if (selectedCard != null)

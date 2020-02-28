@@ -6,19 +6,19 @@ namespace lord_of_death
     class Battlefield
     {
         private Combatant player;
-        private Combatant monster1;
+        private Combatant monster;
         private Combatant monster2;
         private Combatant monster3;
-        internal Combatant Player { get => player; }
-        internal Combatant Monster1 { get => monster1; }
+        public Combatant Player { get => player; }
+        public Combatant Monster { get => monster; set => monster = value; }
 
-        public Battlefield(Combatant player, List<Combatant> monsters)
+        public Battlefield(Combatant player, Combatant monster)
         {
             this.player = player;
-            this.monster1 = monsters[0];
+            this.monster = monster;
             // this.monster2 = monster2;
             // this.monster3 = monster3;
-            Console.WriteLine("{0} creeps out of the forest with preditory eyes", this.monster1.Name, this.monster1.Health);
+            Console.WriteLine("{0} creeps out of the forest with preditory eyes", this.Monster.Name, this.Monster.Health);
             Console.WriteLine("{0} anticipates combat and envisions a strategy", player.Name, player.Health);
         }
 
@@ -37,7 +37,7 @@ namespace lord_of_death
             if (player.DoAllyEffects(ba))
             {
                 //determine target 
-                Combatant target = monster1;
+                Combatant target = Monster;
                 //target takes damage
 
                 target.DoEnemyEffects(ba);
@@ -52,9 +52,9 @@ namespace lord_of_death
         public bool DoMonsterTurn()
         {
 
-            doStartPhase(monster1);
-            doMainPhase(monster1);
-            doEndPhase(monster1);
+            doStartPhase(Monster);
+            doMainPhase(Monster);
+            doEndPhase(Monster);
             return true;
         }
 
@@ -103,9 +103,9 @@ namespace lord_of_death
         }
         public bool IsBattleConcluded()
         {
-            if (monster1.Health <= 0)
+            if (Monster.Health <= 0)
             {
-                Console.WriteLine("{0} has been slain ☠", monster1.Name);
+                Console.WriteLine("{0} has been slain ☠", Monster.Name);
                 return true;
             }
             if (player.Health <= 0)
@@ -118,12 +118,12 @@ namespace lord_of_death
 
         public void DisplayCombatants()
         {
-            var monsterNextAction = monster1.GetNextBattleAct();
+            var monsterNextAction = Monster.GetNextBattleAct();
             //Console.WriteLine("------------------------------------------------------------");
             Console.WriteLine("{0} {1}⚡ {2}💕 -------------- {3} {4}💕 about to {5} {6}",
-                                player.Name, player.Energy, player.Health, monster1.Name, monster1.Health, monsterNextAction.Name, monsterNextAction.EffectDisplay());
+                                player.Name, player.Energy, player.Health, Monster.Name, Monster.Health, monsterNextAction.Name, monsterNextAction.EffectDisplay());
             Console.WriteLine("{0}🔵 {1}🛡️ {2}💉                       {3}🔵 {4}🛡️ {5}💉",
-            player.AllyStatus.Dodge, player.AllyStatus.Shield, player.EnemyStatus.Venom, monster1.AllyStatus.Dodge, monster1.AllyStatus.Shield, monster1.EnemyStatus.Venom);
+            player.AllyStatus.Dodge, player.AllyStatus.Shield, player.EnemyStatus.Venom, Monster.AllyStatus.Dodge, Monster.AllyStatus.Shield, Monster.EnemyStatus.Venom);
         }
 
     }
